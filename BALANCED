@@ -1,0 +1,82 @@
+     A*%%TS  SD  20210823  100826  DJDHAWAN    REL-V7R4M0  5770-WDS
+     A*%%EC
+     A                                      DSPSIZ(24 80 *DS3)
+     A                                      CA03(03)
+     A                                      CA05(05)
+     A                                      CA09(09)
+     A          R SFL1                      SFL
+     A  50                                  SFLNXTCHG
+     A            S_FNAME       10   O  9 17
+     A            S_LNAME       10   O  9 35
+     A            S_BALANCE      9  0O  9 51EDTCDE(L $)
+     A            S_OPTION       1   B  9  9
+        51                                  DSPATR(RI PC)
+     A          R CTL1                      SFLCTL(SFL1)
+     A                                      SFLSIZ(9999)
+     A                                      SFLPAG(8)
+     A                                      OVERLAY
+     A  21                                  SFLCLR
+     A  22                                  SFLDSP
+     A  22                                  SFLDSPCTL
+     A  22                                  SFLEND(*MORE)
+     A            SFLRRN         4S 0H      SFLRCDNBR
+     A                                  2 32'Customer database'
+     A                                      DSPATR(HI UL)
+     A                                  2  3TIME
+     A                                  3  3DATE
+     A                                  2 69USER
+     A                                  6 27'Enter ''U'' to update a record'
+     A                                      COLOR(PNK)
+     A          R RECFOOT
+     A*%%TS  SD  20210818  081409  DJDHAWAN    REL-V7R4M0  5770-WDS
+     A                                      OVERLAY
+     A                                 22 10'F3 = Back'
+     A                                 22 25'F5 = REFRESH'
+     A                                 22 44'F9 = ADD'
+     A            MSG           50   O 20 10COLOR(RED)
+     A*%%RS+<record-sequences>
+     A*%%RS+ <sequence name="Footer">
+     A*%%RS+  <device type="display" width="80" height="24" />
+     A*%%RS+  <record-write record-format="SFL1" />
+     A*%%RS+  <record-write record-format="CTL1" />
+     A*%%RS+  <record-write record-format="RECFOOT" indicator-data="OVERLAY" />
+     A*%%RS+  <record-write record-format="UPDCUST" />
+     A*%%RS+ </sequence>
+     A*%%RS+ <named-data>
+     A*%%RS+  <indicator-data id="OVERLAY" indicators="10" />
+     A*%%RS+ </named-data>
+     A*%%RS </record-sequences>
+     A
+     A
+     A          R UPDCUST
+     A*%%TS  SD  20210823  100826  DJDHAWAN    REL-V7R4M0  5770-WDS
+     A                                      WINDOW(4 16 15 45)
+     A                                      CA12(12 'BACK')
+     A                                      OVERLAY
+     A                                      WDWBORDER((*COLOR BLU) (*CHAR '#-#|-
+     A                                      |#-#'))
+     A                                  3  5'First name...:'
+     A            W_FNAME   R        O  3 21REFFLD(CUST/FNAME DJDHAWAN1/CUSTOME-
+     A                                      RPF)
+     A                                  5  5'Last name....:'
+     A            W_LNAME   R        O  5 21REFFLD(CUST/LNAME DJDHAWAN1/CUSTOME-
+     A                                      RPF)
+     A                                  7  5'Balance......:'
+     A            W_BALANCE R        O  7 21REFFLD(CUST/BALANCE DJDHAWAN1/CUSTO-
+     A                                      MERPF)
+     A                                  9  5'Amount.......:'
+     A                                      DSPATR(HI)
+     A            W_AMOUNT       6  0B  9 21COLOR(WHT)
+     A  31                                  DSPATR(RI PC)
+     A                                 11  5'Deposit(D)/Withdraw(W).:'
+     A                                      DSPATR(HI)
+     A            W_OPTION       1A  B 11 32DSPATR(HI)
+     A  32                                  DSPATR(RI PC)
+     A            W_MSG         35A  O 13  5DSPATR(BL)
+     A                                      COLOR(RED)
+     A                                 14 25'F12 = Back'
+     A                                  1 18'Update Customer'
+     A                                      DSPATR(HI)
+     A                                      DSPATR(UL)
+     A                                      COLOR(WHT)
+     A                                 14  6'Enter = Update'   
