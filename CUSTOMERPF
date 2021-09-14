@@ -1,0 +1,7 @@
+     A                                      UNIQUE
+     A          R CUST
+     A            FNAME         10A
+     A            LNAME         10A
+     A            AGE            2S 0
+     A            BALANCE        9S 0
+     A          K FNAME                 
